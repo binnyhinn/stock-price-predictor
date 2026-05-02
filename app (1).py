@@ -53,8 +53,8 @@ if st.button("Run Prediction"):
             r2   = r2_score(y_test, y_pred)
 
             latest = df[feature_cols].iloc[-1].values.reshape(1, -1)
-            next_price = float(model.predict(scaler.transform(latest))[0])
-            last_close = float(df["Close"].iloc[-1])
+            next_price = float(np.array(model.predict(scaler.transform(latest))).flatten()[0])
+            last_close = float(np.array(df["Close"].iloc[-1]).flatten()[0])
             change     = next_price - last_close
             change_pct = (change / last_close) * 100
 
